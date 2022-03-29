@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Picabu</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link href="~/css/StyleSheet.scss" rel="stylesheet" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
+    
+</head>
+<body>
+    <div class="header">
+        <div class="brand"> <a href="#">News</a></div>  
+
+            @if (User.Identity.IsAuthenticated)
+                {
+                  <div class="user-header">
+                    <span>@User.Identity.Name</span>
+                   
+                    <details>
+                        <summary></summary>
+                        <nav class="menu">
+                            <a href="#link">Home</a>
+                            <a href="#link">Work</a>
+                            <a href="#link">Links</a>
+                            <a href="#link">Contact</a>
+                            <a asp-action="Logout" asp-controller="Account" class="noselect">
+                                <span class='text'>LogOut</span>
+                                <span class="icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+
+                                        <path d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z" />
+
+                                    </svg>
+                                </span>
+                            </a>
+                        </nav>
+                    </details>
+                 </div>                  
+                }
+                else
+                {
+                <div class="div-registrations">
+                    <div class="sign-in-button"><a asp-action="Login" asp-controller="Account">SignIn</a></div>
+                    <div class="sign-in-button"><a asp-action="Register" asp-controller="Account">Registration</a></div>
+                </div>
+                }
+    
+                
+     </div>
+
+        <div class="container">
+            <main role="main" class="pb-3">
+                @RenderBody()
+            </main>
+        </div>
+
+        <footer class="border-top footer text-muted">
+            <div class="container">
+                &copy; 2021 - Picabu - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            </div>
+        </footer>
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+        @RenderSection("Scripts", required: false)
+</body>
+</html>

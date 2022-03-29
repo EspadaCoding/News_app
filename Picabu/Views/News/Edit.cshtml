@@ -1,0 +1,58 @@
+﻿@model News
+@{ ViewData["Title"] = "Edit"; }
+
+<div class="card">
+    <div class="card-header">
+        <h3>Edit News</h3>
+    </div>
+    <div class="card-body">
+        @*<div asp-validation-summary="All" class="text-danger"></div>*@
+        <form asp-controller="News" asp-action="Edit" method="post" enctype="multipart/form-data">
+            <input asp-for="Id" hidden class="form-control">
+            <input asp-for="PosterUrl" hidden class="form-control">
+            <div class="mb-3">
+                <label asp-for="Title" class="form-label"></label>
+                <input asp-for="Title" class="form-control">
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Content" class="form-label"></label>
+                <textarea asp-for="Content" class="form-control"></textarea>
+                <span asp-validation-for="Content" class="text-danger"></span>
+            </div> 
+            @if (Model.PosterUrl != null && Model.PosterUrl != string.Empty)
+            {
+<div class="mb-3">
+    <img src="@Model.PosterUrl" />
+</div>}
+            <div class="mb-3">
+                @*<label asp-for="PosterUrl" class="form-label"></label>
+                    <input asp-for="PosterUrl" class="form-control">*@
+                <label for="ImageFile" class="form-label"></label>
+                <input id="ImageFile" name="ImageFile" type="file" class="form-control">
+            </div>
+            <div class="mb-3">
+                <label asp-for="CategoryId" class="form-label"></label>
+                <select class="form-select" asp-for="CategoryId" asp-items="@ViewBag.Categories">
+                    @*@foreach(Category item in ViewBag.Categories)
+                        {
+                            <option value="@item.Id">@item.Name</option>
+                        }*@
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="Tags" class="form-label">Tags</label>
+                <select name="Tags" id="Tags" class="form-select" multiple asp-items="@ViewBag.Tags"></select>
+            </div>
+            <div class="row ml-1">
+                <button type="submit" class="btn btn-primary col-1">Edit</button>
+                <a asp-action="Index" asp-controller="News" class="btn btn-secondary col-1 ml-2">Back</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script>$("#Tags").chosen();</script>
+}
+
